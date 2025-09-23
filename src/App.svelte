@@ -55,7 +55,7 @@
         };
       }
 
-    //Totals calculations
+    //Totals calculations, convert it into number with +
       summary[act].totalTime += +entry.time;
       summary[act].totalGoalTime += +entry.goal;
       summary[act].totalGoalSets += +entry.goalsets;
