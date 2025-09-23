@@ -17,13 +17,13 @@
 
     function editLog(ei){
         editIndex = ei;
-        editEntry = { ...$logs[ei] }; // copies the log entry that needs to be edited
+        editEntry = { ...$logs[ei] }; // copies the log entry that needs to be edited withiut directly mutating the actual thing
     }
 
     function saveEdit(){
         logs.update(current => {
-            const updated = [...current]; //copies the existing log entry
-            updated[editIndex] = { ...editEntry }; // renders the edited entry with the rest of logs
+            const updated = [...current]; //copies the existing log entry into updated
+            updated[editIndex] = { ...editEntry }; // spread operator to append the edited entry with the rest of logs
             return updated;
         });
         editIndex = null;

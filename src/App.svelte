@@ -5,7 +5,7 @@
   import PreviousLogs from './PrevLog.svelte'
   import Home from './App.svelte'
 
-
+  // Nav routes
   const routes = {
     '/' : Home,
     '/Log': LogYourDay,
@@ -36,14 +36,13 @@
     return diffDays;
   }
 
-  // For reactivity, svelte uses $
-
+  // For reactivity, svelte uses $ so that it changes 
   $: activitySummary = (() => {
     const summary = {};
     const dates = new Set();
     $logs.forEach(entry => {
       dates.add(entry.date);
-      const act = entry.activity;
+      const act = entry.activity; // for all summary data in each activity 
       if (!summary[act]) {
         summary[act] = {
           totalTime: 0,
@@ -56,6 +55,7 @@
         };
       }
 
+    //Totals calculations
       summary[act].totalTime += +entry.time;
       summary[act].totalGoalTime += +entry.goal;
       summary[act].totalGoalSets += +entry.goalsets;
@@ -65,6 +65,7 @@
       summary[act].count += 1;
     });
 
+    //Averages
     for (const act in summary) {
       const s = summary[act];
       s.avgTime = s.count > 0 ? Math.round(s.totalTime / s.count) :0;
@@ -77,9 +78,6 @@
 
     return {summary, totalDays: dates.size};
   })();
-
-
-
 </script>
 
 <nav class="nav">
